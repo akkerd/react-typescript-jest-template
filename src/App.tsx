@@ -20,7 +20,7 @@ function App() {
           Learn React
         </a>
       </header>
-      <Link page="http://www.facebook.com">Facebook</Link>
+      <Link link="http://www.facebook.com" name="Facebook link"></Link>
     </div>
   );
 }

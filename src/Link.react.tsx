@@ -1,41 +1,33 @@
 // Link.react.js
-import React from 'react';
+import * as React from 'react';
 
-const STATUS = {
-  HOVERED: 'hovered',
-  NORMAL: 'normal',
+enum State {
+  HOVERED = 0,
+  NORMAL = 1,
 };
 
-export default class Link extends React.Component {
-  constructor(props) {
-    super(props);
+interface LinkProps{
+  name: string;
+  link: string;
+}
 
-    this._onMouseEnter = this._onMouseEnter.bind(this);
-    this._onMouseLeave = this._onMouseLeave.bind(this);
+interface LinkState{
+  status: State;
+}
 
-    this.state = {
-      class: STATUS.NORMAL,
-    };
-  }
-
-  _onMouseEnter() {
-    this.setState({class: STATUS.HOVERED});
-  }
-
-  _onMouseLeave() {
-    this.setState({class: STATUS.NORMAL});
-  }
+export default class Link extends React.Component<LinkProps, LinkState> {
+    
+  static defaultProps: LinkProps = {
+    name: "Placeholder link name",
+    link: "#"
+  };
+  
+  state: LinkState = {
+    status: State.NORMAL
+  };
 
   render() {
-    return (
-      <a
-        className={this.state.class}
-        href={this.props.page || '#'}
-        onMouseEnter={this._onMouseEnter}
-        onMouseLeave={this._onMouseLeave}
-      >
-        {this.props.children}
-      </a>
-    );
+    return (<a href={this.props.link}>{this.props.name}</a>);
   }
-}
+} 
+
